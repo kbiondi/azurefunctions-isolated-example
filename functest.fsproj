@@ -1,28 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
-        <AzureFunctionsVersion>v3</AzureFunctionsVersion>
-        <OutputType>Exe</OutputType>
-        <_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.12" />
-        <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.0.1" />
-        <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.0.0" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="MyHttpTrigger.fs"/>
-        <Compile Include="Program.fs"/>
-    </ItemGroup>
-    <ItemGroup>
-        <None Include="host.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Include="local.settings.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-            <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-        </None>
-    </ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AzureFunctionsVersion>v3</AzureFunctionsVersion>
+    <UserSecretsId>3054aacc-bf44-4e05-8219-a06774f8c8fd</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Types.fs" />
+    <Compile Include="SingleStation.fs" />
+    <Compile Include="CompileStationData.fs" />
+    <None Include="host.json" />
+    <None Include="local.settings.json" />
+    <Compile Include="HttpTrigger.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.8.0" />
+    <PackageReference Include="FSharp.Data" Version="3.3.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.2" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
 </Project>
