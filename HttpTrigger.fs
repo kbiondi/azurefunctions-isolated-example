@@ -40,12 +40,12 @@ module HttpTrigger =
 
             let isState = 
               match tryGetState with
-              | Some s -> true
+              | Some _ -> true
               | None -> false
 
             let isCounty = 
               match tryGetCounty with
-              | Some c -> true
+              | Some _ -> true
               | None -> false
 
             let badRequestResponse = "Your request is missing required parameters."              

@@ -30,7 +30,7 @@ module SingleStation =
                 let! observationResponse = Observation.AsyncLoad("https://api.weather.gov/stations/" + station.StationId + "/observations/latest?require_qc=true")    
                 let x = observationResponse.Properties    
                 
-                let entry = ({                        
+                let entry = {                        
                         Id = getStringOption(x.Id);                            
                         Temperature = getDecimalOption(x.Temperature); 
                         Dewpoint = getDecimalOption(x.Dewpoint);
@@ -39,13 +39,13 @@ module SingleStation =
                         BarometricPressure = getDecimalOption(x.BarometricPressure); 
                         Visibility = getDecimalOption(x.Visibility); 
                         RelativeHumidity = getDecimalOption(x.RelativeHumidity)
-                        })                        
+                        }                        
 
                 return entry
 
             with
-                | :? WebException as e -> 
-                    let entry = ({ 
+                | :? WebException -> 
+                    let entry = { 
                         Id = None; 
                         Temperature = None; 
                         Dewpoint = None; 
@@ -53,7 +53,7 @@ module SingleStation =
                         WindSpeed = None; 
                         BarometricPressure = None;
                         Visibility = None; 
-                        RelativeHumidity = None})
+                        RelativeHumidity = None}
 
                     return entry   
         }
